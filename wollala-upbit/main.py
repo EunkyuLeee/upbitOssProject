@@ -3,6 +3,9 @@ import sys
 import pandas as pd
 from PySide6 import QtWidgets, QtGui, QtCore
 
+sys.path.insert(0, '../upbit-auto-trade')
+from real_time_data_trade import *
+
 from dialog.apikey_input_dialog import APIKeyInputDialog
 from dialog.program_info_dialog import ProgramInfoDialog
 from user_setting import UserSetting
@@ -321,3 +324,12 @@ if __name__ == '__main__':
     main_window.show()
 
     sys.exit(app.exec())
+
+    websocket.enableTrace(True)
+    ws = websocket.WebSocketApp("ws://api.upbit.com/websocket/v1/orders",
+								on_message=on_message,
+								on_error=on_error,
+								on_close=on_close)
+    ws.on_open = on_open
+    print(ws.on_open)
+    ws.run_forever()

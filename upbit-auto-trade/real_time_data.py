@@ -9,8 +9,8 @@ except ImportError:
     import _thread as thread
 
 
-access_key = ''
-secret_key = ''
+access_key = '0wZ3tD2iNUVlP3mx3NYa1pXstBBcbmnXvDH6OsbP'
+secret_key = 'p5Oqvd6XSM9Yyc0a5V9M4rl4XENRfReJ7MT1BuIM'
 
 def on_message(ws, message):
     json_data = json.loads(message)
