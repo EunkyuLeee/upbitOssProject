@@ -29,8 +29,8 @@ def on_message(ws, message):
             print('매수?')
             # voting algorithm 가져와..
             fngIndex = fngModel()
-            trendIndex = trendPredictModel()
-            if trendIndex >= 0: # 공포탐욕지수는 활용법 (threshold) 조금 더 생각해보자
+            trendIndex = trendPredictModel(df)
+            if trendIndex: # 공포탐욕지수는 활용법 (threshold) 조금 더 생각해보자
                 print('매수!!!')
                 CURRENT_PRICE = 0
                 MY_BULLET = account_data.balance # 현재 장전된 총알 (지갑 총량)
@@ -70,8 +70,8 @@ def on_message(ws, message):
             print('매도?')
             #votine algorithm 가져와...
             fngIndex = fngModel()
-            trendIndex = trendPredictModel()
-            if trendIndex < 0:
+            trendIndex = trendPredictModel(df)
+            if not trendIndex:
                 print('매도!')
                 params = {
                     'market': 'KRW-BTC',

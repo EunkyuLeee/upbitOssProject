@@ -20,8 +20,8 @@ def fear_last_6month():
     # return pd.DataFrame(fng[-8:]) 
     return pd.DataFrame(fng)
 
-plt.plot(fear_last_6month()['fngIndex'])
-plt.show()
+# plt.plot(fear_last_6month()['fngIndex'])
+# plt.show()
 # 공포불안지수에도 RSI를 넣을까?
 '''
 data = fear_last_6month()['fngIndex']
