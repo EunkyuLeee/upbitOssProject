@@ -6,8 +6,8 @@ from urllib.parse import urlencode
 
 import requests
 
-access_key = '0wZ3tD2iNUVlP3mx3NYa1pXstBBcbmnXvDH6OsbP'
-secret_key = 'p5Oqvd6XSM9Yyc0a5V9M4rl4XENRfReJ7MT1BuIM'
+access_key = '7rSdvFyjJMB311tnLxvg2mV5oaHhtjg3Jx9I7cU8'
+secret_key = 'x5ZUFGopyKLzsRlvo7j2kAx73j2QJrr09VxGxrVo'
 
 # 시장가 매수
 # query = {

@@ -7,8 +7,8 @@ try:
 except ImportError:
     import _thread as thread
 
-access_key = ''
-secret_key = ''
+access_key = '7rSdvFyjJMB311tnLxvg2mV5oaHhtjg3Jx9I7cU8'
+secret_key = 'x5ZUFGopyKLzsRlvo7j2kAx73j2QJrr09VxGxrVo'
 
 price=123234
 
@@ -66,7 +66,7 @@ def on_open(ws):
 
 
 websocket.enableTrace(True)
-ws = websocket.WebSocketApp("ws://api.upbit.com/websocket/v1",
+ws = websocket.WebSocketApp("wss://api.upbit.com/websocket/v1",
                             on_message=on_message,
                             on_error=on_error,
                             on_close=on_close)

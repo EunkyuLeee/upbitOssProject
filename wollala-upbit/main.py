@@ -3,6 +3,8 @@ import sys
 import pandas as pd
 from PySide6 import QtWidgets, QtGui, QtCore
 
+import threading
+from time import sleep
 sys.path.insert(0, '../upbit-auto-trade')
 from real_time_data_trade import *
 
@@ -300,7 +302,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         return widget
 
-    def closeEvent(self, e):
+    def closeEvent(self):
         # for thread terminate
         self.asset_thread_worker.stop()
         self.orders_thread_worker.stop()
@@ -317,19 +319,34 @@ class MainWindow(QtWidgets.QMainWindow):
     def orders_thread_worker_fn(self):
         self.upbit.request_order_info_all_df()
 
-
 if __name__ == '__main__':
+
     app = QtWidgets.QApplication([])
     main_window = MainWindow()
-    main_window.show()
-
-    sys.exit(app.exec())
-
+    
     websocket.enableTrace(True)
-    ws = websocket.WebSocketApp("ws://api.upbit.com/websocket/v1/orders",
+    ws = websocket.WebSocketApp("wss://api.upbit.com/websocket/v1",
 								on_message=on_message,
 								on_error=on_error,
 								on_close=on_close)
+    
     ws.on_open = on_open
     print(ws.on_open)
-    ws.run_forever()
+
+    def refresh():
+        while(True):
+            time.sleep(60)
+            main_window.asset_thread_worker.start()
+            main_window.account_info_widget.refresh_btn_clicked()
+            main_window.orders_thread_worker.start()
+            main_window.transaction_history_widget.refresh_btn_clicked()
+            print("refresh")
+
+    t1 = threading.Thread(target=refresh, args=())
+    t2 = threading.Thread(target=ws.run_forever, args=())
+	
+    main_window.show()
+    t1.start()
+    t2.start()
+    
+    sys.exit(app.exec())
